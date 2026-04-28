@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"crypto/md5"
+	"crypto/sha256"
 	"fmt"
 	"log"
 	"os"
@@ -25,5 +26,10 @@ func main() {
 		if hash == md5hash {
 			fmt.Printf("[+] Hash encontrado (MD5): %s\n", password)
 		}
+		hash = fmt.Sprintf("%x", sha256.Sum256([]byte(password)))
+		if hash == sha256hash {
+			fmt.Printf("[+] Hash encontrado (SHA-256): %s\n", password)
+		}
 	}
+	
 }
