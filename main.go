@@ -2,9 +2,14 @@ package main
 
 import (
 	"bufio"
+	"crypto/md5"
+	"fmt"
 	"log"
 	"os"
 )
+
+var md5hash = ""
+var sha256hash = ""
 
 func main() {
 	file, err := os.Open("wordlist.txt")
@@ -16,5 +21,9 @@ func main() {
 
 	for scanner.Scan() {
 		password := scanner.Text()
+		hash := fmt.Sprintf("%x", md5.Sum([]byte(password)))
+		if hash == md5hash {
+			fmt.Printf("[+] Hash encontrado (MD5): %s\n", password)
+		}
 	}
 }
