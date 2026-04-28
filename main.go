@@ -31,5 +31,7 @@ func main() {
 			fmt.Printf("[+] Hash encontrado (SHA-256): %s\n", password)
 		}
 	}
-	
+	if err := scanner.Err(); err != nil {
+		log.Fatalln(err)
+	}
 }
