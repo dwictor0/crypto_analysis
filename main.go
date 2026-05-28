@@ -2,9 +2,7 @@ package main
 
 import (
 	"bufio"
-	"crypto/md5"
-	"crypto/sha256"
-	"fmt"
+	"cryptoanalysis/validate"
 	"log"
 	"os"
 )
@@ -36,14 +34,7 @@ func makeHash(hashList string) {
 
 	for scanner.Scan() {
 		password := scanner.Text()
-		hash := fmt.Sprintf("%x", md5.Sum([]byte(password)))
-		if hash == hashList {
-			fmt.Printf("[+] Hash encontrado (MD5): %s\n", password)
-		}
-		hash = fmt.Sprintf("%x", sha256.Sum256([]byte(password)))
-		if hash == hashList {
-			fmt.Printf("[+] Hash encontrado (SHA-256): %s\n", password)
-		}
+		validate.IdentifyHash(password, hashList)
 	}
 	if err := scanner.Err(); err != nil {
 		log.Fatalln(err)
