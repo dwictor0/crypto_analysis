@@ -9,8 +9,13 @@ import (
 	"os"
 )
 
-var md5hash = ""
-var sha256hash = ""
+type HashDisponiveis struct {
+	MD5Hash    string
+	SHA256Hash string
+}
+
+var md5hash = "81dc9bdb52d04dc20036dbd8313ed055"
+var sha256hash = "914420a9b210195dea7e8a1fdc5234fb1f413c04dba3b5eaabed9df6adb47f51"
 
 func main() {
 	file, err := os.Open("wordlist.txt")
