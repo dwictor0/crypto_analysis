@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	file, err := os.Open("hash.txt")
+	file, err := os.Open("wordlists/hash.txt")
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -25,7 +25,7 @@ func main() {
 }
 
 func makeHash(hashList string) {
-	file, err := os.Open("wordlist.txt")
+	file, err := os.Open("wordlists/wordlist.txt")
 	if err != nil {
 		log.Fatalln(err)
 	}
