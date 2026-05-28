@@ -18,6 +18,23 @@ var md5hash = "81dc9bdb52d04dc20036dbd8313ed055"
 var sha256hash = "914420a9b210195dea7e8a1fdc5234fb1f413c04dba3b5eaabed9df6adb47f51"
 
 func main() {
+	file, err := os.Open("hash.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		hashes := scanner.Text()
+		makeHash(hashes)
+	}
+	if err := scanner.Err(); err != nil {
+		log.Fatalln(err)
+	}
+}
+
+func makeHash(hashList string) {
 	file, err := os.Open("wordlist.txt")
 	if err != nil {
 		log.Fatalln(err)
@@ -28,11 +45,11 @@ func main() {
 	for scanner.Scan() {
 		password := scanner.Text()
 		hash := fmt.Sprintf("%x", md5.Sum([]byte(password)))
-		if hash == md5hash {
+		if hash == hashList {
 			fmt.Printf("[+] Hash encontrado (MD5): %s\n", password)
 		}
 		hash = fmt.Sprintf("%x", sha256.Sum256([]byte(password)))
-		if hash == sha256hash {
+		if hash == hashList {
 			fmt.Printf("[+] Hash encontrado (SHA-256): %s\n", password)
 		}
 	}
